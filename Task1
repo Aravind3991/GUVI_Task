@@ -1,0 +1,86 @@
+m = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
+special_char = ["!","@","#","$","%"]
+
+class system:
+
+    def __init__(self,name,password):
+        self.name=name
+        self.password=password
+
+    def user_name(self):
+        if self.name.endswith("@gmail.com" or "@yahoo.com"):
+           return self.name
+
+    def special_char(self):
+        for i in special_char:
+            b = self.password.find(i)
+            if b >= 0:
+                return self.password
+
+    def upper(self):
+        for j in self.password:
+            y = j.isupper()
+            if y == True:
+                return self.password
+
+    def lower(self):
+        for j in self.password:
+            z = j.islower()
+            if z == True:
+                return self.password
+
+    def number(self):
+        for j in m:
+            b = self.password.find(j)
+            if b >= 0:
+                return self.password
+
+while True:
+    n=int(input(" LOGIN AND REGISTRATION \n 1. Registration \n 2. Login\n 3. Forget Password\n 4. To exit the program or backspace, Enter-'9' \n Enter  "
+            "index of the operation to perform  1 or 2 or 3 or 9 :\n "))
+    if n==1:
+        while True:
+            u=input(" Enter valid email/username:")
+            p=input(" Enter password:")
+            person1 = system(u, p)
+            name=person1.user_name()
+            condition1=person1.special_char()
+            condition2=person1.upper()
+            condition3=person1.lower()
+            condition4=person1.number()
+            if (name==u) and (condition1 and condition2 and condition3 and condition4)==p and (len(p) in range(6,17)):
+                print("REGISTRATION SUCCESSFULL")
+                file=open(u+".txt","w")
+                file.write(p)
+                file.close()
+                break
+            else:
+                print(" Registration Not successful, Enter valid credentials")
+               
+    elif n==2 :
+        while True:
+            name = input(" Enter valid email/username:")
+            import os
+            if os.path.exists(name+".txt"):    
+                pwd = input(" Enter password:")
+                file=open(u+".txt","r")
+                passcode=file.read()
+                if passcode==pwd:
+                  print("\n LOGIN SUCCESSFULL")
+                else:
+                  print(" Password incorrect")
+                break
+            else:
+                print(" User Name not found, Registration required")
+    elif n==3:
+          while True:
+            u = input(" Enter valid email/username to retrive Password:")
+            import os
+            if os.path.exists(u+".txt"):
+                pass1=open(u+".txt","r")
+                print(" Password")
+                print(pass1.read())
+                break
+            print(" Enter Valid User name/email id present in the system!")
+    else:         
+       break
